@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расписание уроков</title>
-    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,7 +20,9 @@
     <div class="max-w-5xl mx-auto w-full flex-1 flex flex-col">
         <!-- Header -->
         <header class="text-center mb-6">
-            <h1 class="text-3xl md:text-4xl font-bold mb-1 drop-shadow-md">🎓 Моё Расписание</h1>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-1 tracking-tight drop-shadow-md">
+                <span class="bg-gradient-to-r from-cyan-200 via-violet-200 to-rose-200 bg-clip-text text-transparent">Моё расписание</span>
+            </h1>
             <p id="currentDateTime" class="text-white/80 text-sm md:text-base font-medium"></p>
         </header>
 
@@ -91,7 +93,6 @@
         <!-- Schedule List -->
         <div class="glass rounded-3xl p-4 md:p-6 flex-1">
             <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <span id="scheduleIcon">📅</span>
                 <span id="scheduleTitle">Понедельник</span>
             </h2>
             <div id="scheduleList" class="space-y-3 pb-4">
