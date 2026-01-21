@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расписание уроков</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="p-4 md:p-6 text-white min-h-screen flex flex-col">
+<body class="p-4 md:p-6 text-gray-900 dark:text-white min-h-screen flex flex-col">
     <!-- Floating Background Shapes -->
     <div class="floating-shapes">
         <div class="shape"></div>
@@ -17,13 +17,16 @@
         <div class="shape"></div>
     </div>
 
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 p-2 rounded-full glass backdrop-blur-md border border-white/20 shadow-lg hover:scale-110 transition-transform">
+        <span id="themeIcon" class="text-xl">🌙</span>
+    </button>
+
     <div class="max-w-5xl mx-auto w-full flex-1 flex flex-col">
         <!-- Header -->
         <header class="text-center mb-6">
-            <h1 class="text-3xl md:text-4xl font-extrabold mb-1 tracking-tight drop-shadow-md">
-                <span class="bg-gradient-to-r from-cyan-200 via-violet-200 to-rose-200 bg-clip-text text-transparent">Моё расписание</span>
-            </h1>
-            <p id="currentDateTime" class="text-white/80 text-sm md:text-base font-medium"></p>
+            <h1 class="text-3xl md:text-4xl font-bold mb-1 drop-shadow-md">🎓 Моё Расписание</h1>
+            <p id="currentDateTime" class="text-gray-700 dark:text-white/80 text-sm md:text-base font-medium"></p>
         </header>
 
         <!-- Top Dashboard (Upper Plaques) -->
@@ -32,46 +35,46 @@
             <!-- Card 1: Countdown Timer -->
             <div class="glass rounded-2xl overflow-hidden relative">
                 <div class="glass-card-header p-3 text-center">
-                    <h3 class="text-xs uppercase tracking-widest font-semibold text-white/70">До звонка</h3>
+                    <h3 class="text-xs uppercase tracking-widest font-semibold text-gray-700 dark:text-white/70">До звонка</h3>
                 </div>
                 <div class="p-4 flex flex-col items-center justify-center h-32">
                     <div class="flex items-baseline gap-1">
                         <span id="timerHours" class="text-4xl font-bold font-mono">00</span>
-                        <span class="text-xl text-white/60">:</span>
+                        <span class="text-xl text-gray-600 dark:text-white/60">:</span>
                         <span id="timerMinutes" class="text-4xl font-bold font-mono">00</span>
-                        <span class="text-xl text-white/60">:</span>
+                        <span class="text-xl text-gray-600 dark:text-white/60">:</span>
                         <span id="timerSeconds" class="text-4xl font-bold font-mono">00</span>
                     </div>
-                    <div id="timerState" class="text-sm text-white/60 mt-2 bg-white/10 px-3 py-1 rounded-full">Загрузка...</div>
+                    <div id="timerState" class="text-sm text-gray-600 dark:text-white/60 mt-2 bg-white/20 dark:bg-white/10 px-3 py-1 rounded-full">Загрузка...</div>
                 </div>
             </div>
 
             <!-- Card 2: Current Status -->
             <div class="glass rounded-2xl overflow-hidden">
                 <div class="glass-card-header p-3 text-center">
-                    <h3 class="text-xs uppercase tracking-widest font-semibold text-white/70">Сейчас</h3>
+                    <h3 class="text-xs uppercase tracking-widest font-semibold text-gray-700 dark:text-white/70">Сейчас</h3>
                 </div>
                 <div class="p-4 flex flex-col items-center justify-center h-32 relative">
                     <div id="currentLessonName" class="text-xl font-bold text-center leading-tight mb-1 line-clamp-2">--</div>
-                    <div id="currentLessonRoom" class="text-sm text-white/70 mb-3">--</div>
+                    <div id="currentLessonRoom" class="text-sm text-gray-600 dark:text-white/70 mb-3">--</div>
                     
                     <!-- Progress Bar -->
-                    <div class="w-full absolute bottom-0 left-0 h-1.5 bg-white/10">
+                    <div class="w-full absolute bottom-0 left-0 h-1.5 bg-gray-300 dark:bg-white/10">
                         <div id="progressBar" class="progress-bar h-full transition-all duration-1000" style="width: 0%"></div>
                     </div>
-                    <div class="absolute bottom-2 right-2 text-xs text-white/50" id="progressPercent">0%</div>
+                    <div class="absolute bottom-2 right-2 text-xs text-gray-500 dark:text-white/50" id="progressPercent">0%</div>
                 </div>
             </div>
 
             <!-- Card 3: Next Lesson -->
             <div class="glass rounded-2xl overflow-hidden">
                 <div class="glass-card-header p-3 text-center">
-                    <h3 class="text-xs uppercase tracking-widest font-semibold text-white/70">Следующий урок</h3>
+                    <h3 class="text-xs uppercase tracking-widest font-semibold text-gray-700 dark:text-white/70">Следующий урок</h3>
                 </div>
                 <div class="p-4 flex flex-col items-center justify-center h-32">
-                    <div id="nextLessonName" class="text-lg font-bold text-center text-white/90 mb-1">--</div>
-                    <div class="flex items-center gap-2 text-sm text-white/70">
-                        <span id="nextLessonRoom" class="bg-white/10 px-2 py-0.5 rounded text-xs">--</span>
+                    <div id="nextLessonName" class="text-lg font-bold text-center text-gray-800 dark:text-white/90 mb-1">--</div>
+                    <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                        <span id="nextLessonRoom" class="bg-white/30 dark:bg-white/10 px-2 py-0.5 rounded text-xs">--</span>
                         <span id="nextLessonTime">--:--</span>
                     </div>
                 </div>
@@ -81,18 +84,19 @@
         <!-- Day Selector -->
         <div class="glass rounded-2xl p-2 mb-4">
             <div class="flex overflow-x-auto gap-2 pb-1 md:pb-0 md:justify-center px-1 hide-scrollbar">
-                <button class="day-btn glass rounded-xl px-4 py-2 text-white font-medium whitespace-nowrap min-w-[60px]" data-day="0">Пн</button>
-                <button class="day-btn glass rounded-xl px-4 py-2 text-white font-medium whitespace-nowrap min-w-[60px]" data-day="1">Вт</button>
-                <button class="day-btn glass rounded-xl px-4 py-2 text-white font-medium whitespace-nowrap min-w-[60px]" data-day="2">Ср</button>
-                <button class="day-btn glass rounded-xl px-4 py-2 text-white font-medium whitespace-nowrap min-w-[60px]" data-day="3">Чт</button>
-                <button class="day-btn glass rounded-xl px-4 py-2 text-white font-medium whitespace-nowrap min-w-[60px]" data-day="4">Пт</button>
-                <button class="day-btn glass rounded-xl px-4 py-2 text-white font-medium whitespace-nowrap min-w-[60px]" data-day="5">Сб</button>
+                <button class="day-btn glass rounded-xl px-4 py-2 text-gray-800 dark:text-white font-medium whitespace-nowrap min-w-[60px]" data-day="0">Пн</button>
+                <button class="day-btn glass rounded-xl px-4 py-2 text-gray-800 dark:text-white font-medium whitespace-nowrap min-w-[60px]" data-day="1">Вт</button>
+                <button class="day-btn glass rounded-xl px-4 py-2 text-gray-800 dark:text-white font-medium whitespace-nowrap min-w-[60px]" data-day="2">Ср</button>
+                <button class="day-btn glass rounded-xl px-4 py-2 text-gray-800 dark:text-white font-medium whitespace-nowrap min-w="60px"" data-day="3">Чт</button>
+                <button class="day-btn glass rounded-xl px-4 py-2 text-gray-800 dark:text-white font-medium whitespace-nowrap min-w="60px"" data-day="4">Пт</button>
+                <button class="day-btn glass rounded-xl px-4 py-2 text-gray-800 dark:text-white font-medium whitespace-nowrap min-w="60px"" data-day="5">Сб</button>
             </div>
         </div>
 
         <!-- Schedule List -->
         <div class="glass rounded-3xl p-4 md:p-6 flex-1">
-            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+                <span id="scheduleIcon">📅</span>
                 <span id="scheduleTitle">Понедельник</span>
             </h2>
             <div id="scheduleList" class="space-y-3 pb-4">
