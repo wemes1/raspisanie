@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SchoolTime — Твой школьный помощник</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="header-title">
+                <h1>SchoolTime</h1>
+                <p id="header-date">Загрузка...</p>
+            </div>
+            <div class="clock-icon">
+                <i data-lucide="calendar"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Tab: Timer -->
+        <section id="tab-timer" class="tab-content active">
+            <div class="countdown-card" id="main-countdown" style="margin-top: 20px; padding: 40px 32px;">
+                <div id="countdown-content">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+            
+            <div style="margin-top: 32px; display: grid; gap: 16px;">
+                <div class="lesson-item" style="background: rgba(255,255,255,0.02);">
+                    <div class="lesson-left">
+                        <div class="lesson-order"><i data-lucide="zap" style="width:18px;height:18px;color:#fcd34d"></i></div>
+                        <div class="lesson-info">
+                            <h3 style="font-size: 14px; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.1em;">Совет на сегодня</h3>
+                            <p style="font-weight: 600;">Не забудь подготовить форму!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Schedule -->
+        <section id="tab-schedule" class="tab-content">
+            <div class="day-selector">
+                <button class="nav-arrow" id="day-prev"><i data-lucide="chevron-left"></i></button>
+                <div id="day-buttons">
+                    <!-- Dynamic day buttons -->
+                </div>
+                <button class="nav-arrow" id="day-next"><i data-lucide="chevron-right"></i></button>
+            </div>
+
+            <div class="lesson-list" id="lesson-list">
+                <!-- Dynamic lessons -->
+            </div>
+        </section>
+
+        <!-- Tab: Bells -->
+        <section id="tab-bells" class="tab-content">
+            <div class="bells-card">
+                <div class="bells-header">
+                    <i data-lucide="bell" style="color: #fbbf24;"></i>
+                    Расписание звонков
+                </div>
+                <div id="bells-list">
+                    <!-- Dynamic bells -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Grades -->
+        <section id="tab-grades" class="tab-content">
+            <div class="grade-calc-card">
+                <p class="average-label">Средний балл</p>
+                <div class="average-value" id="avg-grade-display">0.00</div>
+                <div class="timer-label" id="grades-count">Оценок нет</div>
+            </div>
+
+            <div class="grade-buttons">
+                <button class="grade-btn btn-5" onclick="addGrade(5)">5</button>
+                <button class="grade-btn btn-4" onclick="addGrade(4)">4</button>
+                <button class="grade-btn btn-3" onclick="addGrade(3)">3</button>
+                <button class="grade-btn btn-2" onclick="addGrade(2)">2</button>
+            </div>
+
+            <div class="grades-container">
+                <div class="grades-header">
+                    <h4 style="font-weight: 700; opacity: 0.8;">История оценок</h4>
+                </div>
+                <div class="grades-list" id="grades-history">
+                    <!-- Dynamic pills -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Info -->
+        <section id="tab-info" class="tab-content">
+            <div class="countdown-card" style="margin-bottom: 24px; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3);">
+                <h3 style="font-size: 24px; margin-bottom: 16px;">Школьный ассистент</h3>
+                <p style="color: var(--text-dim); line-height: 1.6;">Это приложение поможет тебе всегда быть в курсе расписания и точно знать, сколько времени осталось до звонка.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-cols: 1fr 1fr; gap: 16px;">
+                <div class="lesson-item" style="padding: 16px; flex-direction: column; gap: 4px;">
+                    <span style="font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">Версия</span>
+                    <span style="font-weight: 700;">1.5.0 Final</span>
+                </div>
+                <div class="lesson-item" style="padding: 16px; flex-direction: column; gap: 4px;">
+                    <span style="font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">Статус</span>
+                    <span style="font-weight: 700; color: #10b981;">Online</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <div class="nav-item active" data-target="timer">
+                <i data-lucide="timer"></i>
+                <span>Таймер</span>
+            </div>
+            <div class="nav-item" data-target="schedule">
+                <i data-lucide="book-open"></i>
+                <span>Уроки</span>
+            </div>
+            <div class="nav-item" data-target="bells">
+                <i data-lucide="bell"></i>
+                <span>Звонки</span>
+            </div>
+            <div class="nav-item" data-target="grades">
+                <i data-lucide="graduation-cap"></i>
+                <span>Балл</span>
+            </div>
+            <div class="nav-item" data-target="info">
+                <i data-lucide="info"></i>
+                <span>Инфо</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
