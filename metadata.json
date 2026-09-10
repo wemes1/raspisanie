@@ -1,0 +1,8 @@
+{
+  "name": "SchoolTime",
+  "description": "Приложение для отслеживания расписания уроков, звонков и времени до конца текущего занятия.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
