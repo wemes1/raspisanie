@@ -320,6 +320,123 @@ function setupNavigation() {
     });
 }
 
+// --- WALLPAPER & LIQUID GLASS SETTINGS ---
+function setupWallpaperSettings() {
+    const wpElement = document.getElementById('app-wallpaper');
+    const overlayElement = document.getElementById('app-wallpaper-overlay');
+    const fileInput = document.getElementById('wallpaper-file-input');
+    const uploadBtn = document.getElementById('wallpaper-upload-btn');
+    const presetWavesBtn = document.getElementById('wp-preset-waves');
+    const presetDarkBtn = document.getElementById('wp-preset-dark');
+    const blurSlider = document.getElementById('blur-slider');
+    const dimSlider = document.getElementById('dim-slider');
+    const blurDisplay = document.getElementById('blur-val-display');
+    const dimDisplay = document.getElementById('dim-val-display');
+    const headerWpBtn = document.getElementById('header-wallpaper-btn');
+
+    // Restore wallpaper
+    const savedWp = localStorage.getItem('schooltime_custom_wallpaper');
+    if (savedWp && wpElement) {
+        wpElement.style.backgroundImage = `url('${savedWp}')`;
+        if (presetWavesBtn) presetWavesBtn.classList.remove('active');
+        if (presetDarkBtn) presetDarkBtn.classList.remove('active');
+    }
+
+    // Restore blur
+    const savedBlur = localStorage.getItem('schooltime_glass_blur') || '28';
+    if (blurSlider && blurDisplay) {
+        blurSlider.value = savedBlur;
+        blurDisplay.innerText = `${savedBlur}px`;
+        document.documentElement.style.setProperty('--glass-blur', `${savedBlur}px`);
+    }
+
+    // Restore dim
+    const savedDim = localStorage.getItem('schooltime_glass_dim') || '35';
+    if (dimSlider && dimDisplay && overlayElement) {
+        dimSlider.value = savedDim;
+        dimDisplay.innerText = `${savedDim}%`;
+        overlayElement.style.background = `radial-gradient(circle at 50% 10%, rgba(0, 0, 0, ${savedDim * 0.005}) 0%, rgba(0, 0, 0, ${savedDim * 0.012}) 100%)`;
+    }
+
+    // Header shortcut
+    if (headerWpBtn) {
+        headerWpBtn.onclick = () => {
+            const infoNav = document.querySelector('.nav-item[data-target="info"]');
+            if (infoNav) infoNav.click();
+            setTimeout(() => {
+                const card = document.querySelector('.settings-glass-card');
+                if (card) card.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        };
+    }
+
+    // Upload button triggers file picker
+    if (uploadBtn && fileInput) {
+        uploadBtn.onclick = () => fileInput.click();
+        fileInput.onchange = (e) => {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const dataUrl = event.target.result;
+                if (wpElement) wpElement.style.backgroundImage = `url('${dataUrl}')`;
+                try {
+                    localStorage.setItem('schooltime_custom_wallpaper', dataUrl);
+                } catch (err) {
+                    console.warn('LocalStorage quota reached for image', err);
+                }
+                if (presetWavesBtn) presetWavesBtn.classList.remove('active');
+                if (presetDarkBtn) presetDarkBtn.classList.remove('active');
+            };
+            reader.readAsDataURL(file);
+        };
+    }
+
+    // Preset 1: Monochrome iOS waves
+    if (presetWavesBtn) {
+        presetWavesBtn.onclick = () => {
+            if (wpElement) wpElement.style.backgroundImage = "url('/wallpaper.svg')";
+            localStorage.removeItem('schooltime_custom_wallpaper');
+            presetWavesBtn.classList.add('active');
+            if (presetDarkBtn) presetDarkBtn.classList.remove('active');
+        };
+    }
+
+    // Preset 2: Deep Aurora Dark
+    if (presetDarkBtn) {
+        presetDarkBtn.onclick = () => {
+            if (wpElement) {
+                wpElement.style.backgroundImage = 'linear-gradient(135deg, #090a10 0%, #171827 50%, #0d121f 100%)';
+            }
+            localStorage.setItem('schooltime_custom_wallpaper', 'linear-gradient(135deg, #090a10 0%, #171827 50%, #0d121f 100%)');
+            presetDarkBtn.classList.add('active');
+            if (presetWavesBtn) presetWavesBtn.classList.remove('active');
+        };
+    }
+
+    // Blur slider
+    if (blurSlider) {
+        blurSlider.oninput = (e) => {
+            const val = e.target.value;
+            if (blurDisplay) blurDisplay.innerText = `${val}px`;
+            document.documentElement.style.setProperty('--glass-blur', `${val}px`);
+            localStorage.setItem('schooltime_glass_blur', val);
+        };
+    }
+
+    // Dim slider
+    if (dimSlider) {
+        dimSlider.oninput = (e) => {
+            const val = e.target.value;
+            if (dimDisplay) dimDisplay.innerText = `${val}%`;
+            if (overlayElement) {
+                overlayElement.style.background = `radial-gradient(circle at 50% 10%, rgba(0, 0, 0, ${val * 0.005}) 0%, rgba(0, 0, 0, ${val * 0.012}) 100%)`;
+            }
+            localStorage.setItem('schooltime_glass_dim', val);
+        };
+    }
+}
+
 // --- INIT ---
 function init() {
     if (window.lucide) lucide.createIcons();
@@ -328,6 +445,7 @@ function init() {
     renderBells();
     renderGrades();
     setupNavigation();
+    setupWallpaperSettings();
 
     // Set up listeners
     const prevBtn = document.getElementById('day-prev');

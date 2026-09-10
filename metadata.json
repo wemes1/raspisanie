@@ -1,6 +1,6 @@
 {
   "name": "SchoolTime",
-  "description": "Приложение для отслеживания расписания уроков, звонков и времени до конца текущего занятия.",
+  "description": "Школьный помощник с расписанием уроков, звонков, таймером до конца занятия и калькулятором среднего балла в дизайне жидкого стекла iOS.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

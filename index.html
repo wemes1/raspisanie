@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SchoolTime — Твой школьный помощник</title>
-    <meta name="description" content="Приложение для отслеживания расписания уроков, звонков и времени до конца текущего занятия.">
-    <meta property="og:title" content="SchoolTime — Твой школьный помощник">
-    <meta property="og:description" content="Приложение для отслеживания расписания уроков, звонков и времени до конца текущего занятия.">
+    <title>SchoolTime — Школьный помощник</title>
+    <meta name="description" content="Школьный помощник с расписанием уроков, звонков, таймером до конца занятия и калькулятором среднего балла в дизайне жидкого стекла iOS.">
+    <meta property="og:title" content="SchoolTime — Школьный помощник">
+    <meta property="og:description" content="Школьный помощник с расписанием уроков, звонков, таймером до конца занятия и калькулятором среднего балла в дизайне жидкого стекла iOS.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- App Wallpaper Layer -->
+    <div class="app-wallpaper" id="app-wallpaper"></div>
+    <div class="app-wallpaper-overlay" id="app-wallpaper-overlay"></div>
     <div class="blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -32,8 +35,13 @@
                 <h1>SchoolTime</h1>
                 <p id="header-date">Загрузка...</p>
             </div>
-            <div class="clock-icon">
-                <i data-lucide="calendar"></i>
+            <div class="header-actions">
+                <button class="glass-btn-icon" id="header-wallpaper-btn" title="Обои и стекло">
+                    <i data-lucide="image"></i>
+                </button>
+                <div class="clock-icon">
+                    <i data-lucide="calendar"></i>
+                </div>
             </div>
         </div>
     </header>
@@ -115,19 +123,75 @@
 
         <!-- Tab: Info -->
         <section id="tab-info" class="tab-content">
-            <div class="countdown-card" style="margin-bottom: 24px; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3);">
-                <h3 style="font-size: 24px; margin-bottom: 16px;">Школьный ассистент</h3>
-                <p style="color: var(--text-dim); line-height: 1.6;">Это приложение поможет тебе всегда быть в курсе расписания и точно знать, сколько времени осталось до звонка.</p>
+            <!-- iOS Wallpaper & Glass Settings -->
+            <div class="settings-glass-card">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                    <i data-lucide="sparkles" style="color: var(--ios-blue); width: 22px; height: 22px;"></i>
+                    <h3 style="font-size: 20px; font-weight: 700;">Жидкое стекло iOS</h3>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.5; margin-bottom: 16px;">
+                    Обои в стиле iOS и эффект матового стекла с реалистичным преломлением и бликами.
+                </p>
+
+                <div class="settings-row">
+                    <label style="font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; color: var(--text-dim);">
+                        Обои рабочего стола
+                    </label>
+
+                    <div class="wallpaper-presets">
+                        <button class="wallpaper-thumb-btn active" id="wp-preset-waves">
+                            <i data-lucide="layers" style="width: 16px; height: 16px; color: #93c5fd;"></i>
+                            <span>Монохром iOS</span>
+                        </button>
+                        <button class="wallpaper-thumb-btn" id="wp-preset-dark">
+                            <i data-lucide="moon" style="width: 16px; height: 16px; color: #a78bfa;"></i>
+                            <span>Deep Aurora</span>
+                        </button>
+                    </div>
+
+                    <input type="file" id="wallpaper-file-input" accept="image/*" style="display: none;">
+                    <button class="glass-upload-btn" id="wallpaper-upload-btn" type="button">
+                        <i data-lucide="upload-cloud" style="width: 18px; height: 18px;"></i>
+                        <span>Выбрать фото с устройства</span>
+                    </button>
+                    <p style="font-size: 11px; color: var(--text-dim); text-align: center;">
+                        Можно загрузить любой файл или фото, сохранится автоматически
+                    </p>
+
+                    <!-- Sliders -->
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Размытие стекла (Blur)</span>
+                            <span id="blur-val-display">28px</span>
+                        </div>
+                        <input type="range" class="glass-slider" id="blur-slider" min="10" max="45" value="28">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Затемнение фона</span>
+                            <span id="dim-val-display">35%</span>
+                        </div>
+                        <input type="range" class="glass-slider" id="dim-slider" min="0" max="75" value="35">
+                    </div>
+                </div>
+            </div>
+
+            <div class="countdown-card" style="margin-bottom: 20px; background: rgba(10, 132, 255, 0.12); border-color: rgba(10, 132, 255, 0.35);">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Школьный ассистент</h3>
+                <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6;">
+                    Твой персональный таймер уроков, расписание звонков и интерактивный калькулятор среднего балла.
+                </p>
             </div>
             
-            <div style="display: grid; grid-template-cols: 1fr 1fr; gap: 16px;">
-                <div class="lesson-item" style="padding: 16px; flex-direction: column; gap: 4px;">
-                    <span style="font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">Версия</span>
-                    <span style="font-weight: 700;">1.5.0 Final</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div class="lesson-item" style="padding: 16px; flex-direction: column; align-items: flex-start; gap: 4px;">
+                    <span style="font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;">Тема</span>
+                    <span style="font-weight: 700; font-size: 15px;">iOS Liquid Glass</span>
                 </div>
-                <div class="lesson-item" style="padding: 16px; flex-direction: column; gap: 4px;">
-                    <span style="font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">Статус</span>
-                    <span style="font-weight: 700; color: #10b981;">Online</span>
+                <div class="lesson-item" style="padding: 16px; flex-direction: column; align-items: flex-start; gap: 4px;">
+                    <span style="font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;">Статус</span>
+                    <span style="font-weight: 700; font-size: 15px; color: var(--ios-green);">Активен</span>
                 </div>
             </div>
         </section>
