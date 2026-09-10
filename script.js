@@ -367,7 +367,7 @@ function setupWallpaperSettings() {
     }
 
     // Restore transparency
-    const savedTrans = localStorage.getItem('schooltime_glass_transparency') || '91';
+    const savedTrans = localStorage.getItem('schooltime_glass_transparency') || '96';
     if (opacitySlider && opacityDisplay) {
         opacitySlider.value = savedTrans;
         opacityDisplay.innerText = `${savedTrans}%`;
@@ -376,7 +376,7 @@ function setupWallpaperSettings() {
     }
 
     // Restore blur
-    const savedBlur = localStorage.getItem('schooltime_glass_blur') || '24';
+    const savedBlur = localStorage.getItem('schooltime_glass_blur') || '16';
     if (blurSlider && blurDisplay) {
         blurSlider.value = savedBlur;
         blurDisplay.innerText = `${savedBlur}px`;
@@ -384,11 +384,11 @@ function setupWallpaperSettings() {
     }
 
     // Restore dim
-    const savedDim = localStorage.getItem('schooltime_glass_dim') || '35';
+    const savedDim = localStorage.getItem('schooltime_glass_dim') || '0';
     if (dimSlider && dimDisplay && overlayElement) {
         dimSlider.value = savedDim;
         dimDisplay.innerText = `${savedDim}%`;
-        overlayElement.style.background = `radial-gradient(circle at 50% 10%, rgba(0, 0, 0, ${savedDim * 0.005}) 0%, rgba(0, 0, 0, ${savedDim * 0.012}) 100%)`;
+        overlayElement.style.background = Number(savedDim) === 0 ? 'transparent' : `radial-gradient(circle at 50% 10%, rgba(0, 0, 0, ${savedDim * 0.005}) 0%, rgba(0, 0, 0, ${savedDim * 0.012}) 100%)`;
     }
 
     // Header shortcut
@@ -474,7 +474,7 @@ function setupWallpaperSettings() {
             const val = e.target.value;
             if (dimDisplay) dimDisplay.innerText = `${val}%`;
             if (overlayElement) {
-                overlayElement.style.background = `radial-gradient(circle at 50% 10%, rgba(0, 0, 0, ${val * 0.005}) 0%, rgba(0, 0, 0, ${val * 0.012}) 100%)`;
+                overlayElement.style.background = Number(val) === 0 ? 'transparent' : `radial-gradient(circle at 50% 10%, rgba(0, 0, 0, ${val * 0.005}) 0%, rgba(0, 0, 0, ${val * 0.012}) 100%)`;
             }
             localStorage.setItem('schooltime_glass_dim', val);
         };
