@@ -126,23 +126,6 @@ header {
 }
 
 .glass-btn-icon {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
-    backdrop-filter: blur(16px) saturate(200%);
-    -webkit-backdrop-filter: blur(16px) saturate(200%);
-    padding: 9px;
-    border-radius: 14px;
-    border: 1px solid var(--liquid-glass-border-side);
-    border-top: 1.5px solid var(--liquid-glass-border-top);
-    color: var(--text-white);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-btn-icon {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -579,13 +562,13 @@ main {
 /* 4. Плашка калькулятора баллов (Grade Calc Plaque) */
 .grade-calc-card {
     background: var(--liquid-glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border-radius: 32px;
     padding: 28px 24px;
     text-align: center;
     border: 1px solid var(--liquid-glass-border-side);
-    border-top: 2px solid var(--liquid-glass-border-top);
+    border-top: 1px solid var(--liquid-glass-border-top);
     border-bottom: 1px solid var(--liquid-glass-border-bottom);
     margin-bottom: 20px;
     box-shadow: var(--liquid-card-shadow);
@@ -609,7 +592,7 @@ main {
     font-weight: 800;
     letter-spacing: -0.05em;
     color: var(--text-white);
-    text-shadow: 0 4px 32px rgba(10, 132, 255, 0.55), 0 2px 8px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
     margin: 4px 0;
 }
 
@@ -623,19 +606,21 @@ main {
 .grade-btn {
     height: 60px;
     border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--liquid-glass-border-side);
     border-top: 1px solid var(--liquid-glass-border-top);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     font-size: 24px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
 }
 
 .grade-btn:hover {
     transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.14);
 }
 
 .grade-btn:active { 
@@ -643,28 +628,24 @@ main {
 }
 
 .btn-5 { 
-    background: rgba(48, 209, 88, 0.18);
     color: #4ade80; 
     border-color: rgba(48, 209, 88, 0.35);
-    border-top-color: rgba(255, 255, 255, 0.6);
+    border-top-color: rgba(255, 255, 255, 0.5);
 }
 .btn-4 { 
-    background: rgba(10, 132, 255, 0.18);
     color: #60a5fa; 
     border-color: rgba(10, 132, 255, 0.35);
-    border-top-color: rgba(255, 255, 255, 0.6);
+    border-top-color: rgba(255, 255, 255, 0.5);
 }
 .btn-3 { 
-    background: rgba(255, 159, 10, 0.18);
     color: #fbbf24; 
     border-color: rgba(255, 159, 10, 0.35);
-    border-top-color: rgba(255, 255, 255, 0.6);
+    border-top-color: rgba(255, 255, 255, 0.5);
 }
 .btn-2 { 
-    background: rgba(255, 69, 58, 0.18);
     color: #fb7185; 
     border-color: rgba(255, 69, 58, 0.35);
-    border-top-color: rgba(255, 255, 255, 0.6);
+    border-top-color: rgba(255, 255, 255, 0.5);
 }
 
 .grades-container {
@@ -707,10 +688,15 @@ main {
     cursor: pointer;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-top: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     transition: transform 0.2s, opacity 0.2s;
+}
+
+.grade-pill:hover {
+    background: rgba(255, 255, 255, 0.14);
 }
 
 .grade-pill:active {
