@@ -32,7 +32,7 @@
     <header>
         <div class="header-content">
             <div class="header-title">
-                <h1>SchoolTime</h1>
+                <h1>SchoolTime <span style="font-size: 13px; padding: 3px 9px; border-radius: 10px; background: rgba(10, 132, 255, 0.25); border: 1px solid rgba(10, 132, 255, 0.45); font-weight: 700; color: #93c5fd; vertical-align: middle; letter-spacing: 0.02em;">9 «Б»</span></h1>
                 <p id="header-date">Загрузка...</p>
             </div>
             <div class="header-actions">
@@ -161,10 +161,18 @@
                     <!-- Sliders -->
                     <div class="slider-group">
                         <div class="slider-header">
-                            <span>Размытие стекла (Blur)</span>
-                            <span id="blur-val-display">28px</span>
+                            <span>Прозрачность элементов</span>
+                            <span id="opacity-val-display">91%</span>
                         </div>
-                        <input type="range" class="glass-slider" id="blur-slider" min="10" max="45" value="28">
+                        <input type="range" class="glass-slider" id="opacity-slider" min="50" max="98" value="91">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span>Размытие стекла (Blur)</span>
+                            <span id="blur-val-display">24px</span>
+                        </div>
+                        <input type="range" class="glass-slider" id="blur-slider" min="8" max="45" value="24">
                     </div>
 
                     <div class="slider-group">

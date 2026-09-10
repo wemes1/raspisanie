@@ -11,49 +11,49 @@ const BELLS = [
 ];
 
 const LESSONS = {
-    1: [
+    1: [ // Понедельник
         { name: "Разговоры о важном", room: "—" },
-        { name: "География", room: "304" },
-        { name: "Труды (маст)", room: "Мастерская" },
-        { name: "История", room: "104" },
-        { name: "ОБЖ", room: "—" }
-    ],
-    2: [
-        { name: "Русский язык", room: "308" },
-        { name: "Английский язык", room: "105/107" },
-        { name: "Химия", room: "211" },
-        { name: "Физика", room: "209" },
-        { name: "История", room: "104" },
-        { name: "Геометрия", room: "205" },
-        { name: "Алгебра", room: "205" }
-    ],
-    3: [
-        { name: "География", room: "304" },
-        { name: "Труды (маст)", room: "Мастерская" },
-        { name: "Английский / Информ", room: "105/210" },
         { name: "Алгебра", room: "203" },
-        { name: "Вероятность и стат", room: "203" },
+        { name: "Русский язык", room: "308" },
+        { name: "Родной язык", room: "-/301/308" },
+        { name: "Химия", room: "211" },
+        { name: "Биология", room: "303" },
+        { name: "Физика", room: "209" },
+        { name: "История", room: "202" }
+    ],
+    2: [ // Вторник
+        { name: "Геометрия", room: "203" },
+        { name: "Русский язык", room: "308" },
+        { name: "Физкультура", room: "Спортзал" },
+        { name: "Обществознание", room: "202" },
+        { name: "Литература", room: "308" }
+    ],
+    3: [ // Среда
+        { name: "География", room: "304" },
+        { name: "Труд (мастерская)", room: "Мастерская" },
+        { name: "Английский язык", room: "105/107" },
+        { name: "Алгебра", room: "203" },
+        { name: "Вероятность и статистика", room: "203" },
         { name: "Русский язык", room: "308" },
         { name: "Литература", room: "308" },
         { name: "Физика", room: "209" }
     ],
-    4: [
+    4: [ // Четверг
         { name: "Литература", room: "308" },
         { name: "Биология", room: "303" },
-        { name: "Информ / Английский", room: "210/107" },
-        { name: "ОБЖ", room: "—" },
-        { name: "Геометрия", room: "205" },
-        { name: "Английский язык", room: "105/107" },
+        { name: "Английский / Информатика", room: "105/210" },
+        { name: "ОБЗР", room: "—" },
+        { name: "Геометрия", room: "203" },
+        { name: "Информатика / Английский", room: "210/107" },
+        { name: "История", room: "202" },
         { name: "Физика", room: "209" }
     ],
-    5: [
-        { name: "Физика", room: "209" },
-        { name: "Обществознание", room: "104" },
-        { name: "Физкультура", room: "Спортзал" },
-        { name: "Родная литература", room: "301/308" },
-        { name: "Алгебра", room: "205" },
-        { name: "Литература", room: "308" },
-        { name: "Вероятность и стат", room: "205" }
+    5: [ // Пятница
+        { name: "География", room: "304" },
+        { name: "Алгебра", room: "203" },
+        { name: "Башкирский язык", room: "102/103" },
+        { name: "Английский язык", room: "105/107" },
+        { name: "Химия", room: "211" }
     ]
 };
 
@@ -135,12 +135,34 @@ function renderCountdown() {
 
     if (!status) {
         const firstStart = timeToMinutes(BELLS[0].start);
-        const lastEnd = timeToMinutes(BELLS[BELLS.length - 1].end);
-        if (currentMins < firstStart) {
-            container.innerHTML = `<h2 class="lesson-name">Уроки скоро</h2><p style="color: var(--text-dim)">Готовься к первому занятию!</p>`;
+        if (schedule.length > 0 && currentMins < firstStart) {
+            const firstLesson = schedule[0];
+            const remainingSecs = (firstStart * 60) - (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
+            container.innerHTML = `
+                <div class="status-badge status-break">
+                    <i data-lucide="sun" style="width:14px;height:14px"></i> Скоро уроки
+                </div>
+                <h2 class="lesson-name">1-й урок: ${firstLesson.name}</h2>
+                <div class="timer-row">
+                    <div class="timer-display-group">
+                        <div class="timer-display">${formatTime(remainingSecs)}</div>
+                        <div class="timer-label">До начала занятий</div>
+                    </div>
+                    <div class="timer-info">
+                        <div class="label">Кабинет</div>
+                        <div class="value">${firstLesson.room}</div>
+                        <div class="label" style="margin-top:2px">Начало: ${BELLS[0].start}</div>
+                    </div>
+                </div>`;
         } else {
-            container.innerHTML = `<h2 class="lesson-name">Свобода!</h2><p style="color: var(--text-dim)">Уроки на сегодня закончились.</p>`;
+            container.innerHTML = `
+                <div class="status-badge status-break">
+                    <i data-lucide="check-circle" style="width:14px;height:14px"></i> Уроки завершены
+                </div>
+                <h2 class="lesson-name">Свобода!</h2>
+                <p style="color: var(--text-dim); margin-top: 6px; font-size: 14px;">Все занятия на сегодня закончились. Отличного отдыха!</p>`;
         }
+        if (window.lucide) lucide.createIcons();
         return;
     }
 
@@ -328,6 +350,8 @@ function setupWallpaperSettings() {
     const uploadBtn = document.getElementById('wallpaper-upload-btn');
     const presetWavesBtn = document.getElementById('wp-preset-waves');
     const presetDarkBtn = document.getElementById('wp-preset-dark');
+    const opacitySlider = document.getElementById('opacity-slider');
+    const opacityDisplay = document.getElementById('opacity-val-display');
     const blurSlider = document.getElementById('blur-slider');
     const dimSlider = document.getElementById('dim-slider');
     const blurDisplay = document.getElementById('blur-val-display');
@@ -342,8 +366,17 @@ function setupWallpaperSettings() {
         if (presetDarkBtn) presetDarkBtn.classList.remove('active');
     }
 
+    // Restore transparency
+    const savedTrans = localStorage.getItem('schooltime_glass_transparency') || '91';
+    if (opacitySlider && opacityDisplay) {
+        opacitySlider.value = savedTrans;
+        opacityDisplay.innerText = `${savedTrans}%`;
+        const opacityToken = ((100 - Number(savedTrans)) / 100).toFixed(3);
+        document.documentElement.style.setProperty('--glass-opacity', opacityToken);
+    }
+
     // Restore blur
-    const savedBlur = localStorage.getItem('schooltime_glass_blur') || '28';
+    const savedBlur = localStorage.getItem('schooltime_glass_blur') || '24';
     if (blurSlider && blurDisplay) {
         blurSlider.value = savedBlur;
         blurDisplay.innerText = `${savedBlur}px`;
@@ -411,6 +444,17 @@ function setupWallpaperSettings() {
             localStorage.setItem('schooltime_custom_wallpaper', 'linear-gradient(135deg, #090a10 0%, #171827 50%, #0d121f 100%)');
             presetDarkBtn.classList.add('active');
             if (presetWavesBtn) presetWavesBtn.classList.remove('active');
+        };
+    }
+
+    // Opacity slider (transparency control)
+    if (opacitySlider) {
+        opacitySlider.oninput = (e) => {
+            const val = e.target.value;
+            if (opacityDisplay) opacityDisplay.innerText = `${val}%`;
+            const opacityToken = ((100 - Number(val)) / 100).toFixed(3);
+            document.documentElement.style.setProperty('--glass-opacity', opacityToken);
+            localStorage.setItem('schooltime_glass_transparency', val);
         };
     }
 

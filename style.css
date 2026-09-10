@@ -1,5 +1,5 @@
 :root {
-    --bg-dark: #0a0b10;
+    --bg-dark: #08090d;
     --ios-blue: #0a84ff;
     --ios-green: #30d158;
     --ios-orange: #ff9f0a;
@@ -7,22 +7,32 @@
     --ios-purple: #bf5af2;
     --ios-indigo: #5e5ce6;
     
-    /* Liquid Glass tokens */
-    --glass-bg: rgba(22, 25, 35, 0.62);
-    --glass-bg-light: rgba(255, 255, 255, 0.14);
-    --glass-bg-active: rgba(10, 132, 255, 0.22);
-    --glass-border: rgba(255, 255, 255, 0.24);
-    --glass-border-subtle: rgba(255, 255, 255, 0.12);
-    --glass-border-highlight: rgba(255, 255, 255, 0.45);
+    /* Authentic iOS Ultra-Transparent Liquid Glass tokens */
+    --glass-opacity: 0.09;
+    --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, calc(var(--glass-opacity) * 1.35)) 0%, rgba(255, 255, 255, calc(var(--glass-opacity) * 0.35)) 100%);
+    --liquid-glass-bg-subtle: linear-gradient(135deg, rgba(255, 255, 255, calc(var(--glass-opacity) * 0.9)) 0%, rgba(255, 255, 255, calc(var(--glass-opacity) * 0.15)) 100%);
+    --liquid-glass-bg-active: linear-gradient(135deg, rgba(10, 132, 255, 0.22) 0%, rgba(10, 132, 255, 0.06) 100%);
     
-    --glass-blur: 28px;
-    --glass-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
-    --glass-card-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.55), inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.5);
+    --liquid-glass-border-top: rgba(255, 255, 255, 0.55);
+    --liquid-glass-border-side: rgba(255, 255, 255, 0.20);
+    --liquid-glass-border-bottom: rgba(255, 255, 255, 0.10);
+    
+    --liquid-glass-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.32), 
+                           inset 0 1.2px 1.5px 0 rgba(255, 255, 255, 0.5), 
+                           inset 0 -1.2px 1.5px 0 rgba(0, 0, 0, 0.12),
+                           inset 0 0 14px 0 rgba(255, 255, 255, 0.04);
+                           
+    --liquid-card-shadow: 0 18px 45px -8px rgba(0, 0, 0, 0.40), 
+                          inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.6), 
+                          inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.14),
+                          inset 0 0 18px 0 rgba(255, 255, 255, 0.05);
+
+    --glass-blur: 24px;
     
     --text-white: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.76);
-    --text-dim: rgba(255, 255, 255, 0.52);
-    --text-muted: rgba(255, 255, 255, 0.35);
+    --text-secondary: rgba(255, 255, 255, 0.88);
+    --text-dim: rgba(255, 255, 255, 0.64);
+    --text-muted: rgba(255, 255, 255, 0.44);
     
     --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', -apple-system-monospaced, monospace;
@@ -41,7 +51,7 @@ body {
     font-family: var(--font-sans);
     min-height: 100vh;
     overflow-x: hidden;
-    padding-bottom: 110px;
+    padding-bottom: 125px;
     position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -64,8 +74,9 @@ body {
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: radial-gradient(circle at 50% 10%, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.45) 100%);
+    background: radial-gradient(circle at 50% 10%, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.38) 100%);
     pointer-events: none;
+    transition: background 0.3s ease;
 }
 
 /* Subtle Dynamic Ambient Lighting */
@@ -118,16 +129,18 @@ body {
     100% { transform: translate(-25px, 20px) scale(0.95); }
 }
 
-/* Header - iOS Frosted Glass Bar */
+/* ============================================================
+   LIQUID GLASS HEADER (Шапка - Жидкое стекло)
+   ============================================================ */
 header {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(14, 16, 24, 0.65);
-    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    border-bottom: 1px solid var(--glass-border-subtle);
-    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.25), inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, calc(var(--glass-opacity) * 1.3)) 0%, rgba(255, 255, 255, calc(var(--glass-opacity) * 0.25)) 100%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(200%) contrast(105%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(200%) contrast(105%);
+    border-bottom: 1px solid var(--liquid-glass-border-bottom);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.22), inset 0 -1px 1px rgba(255, 255, 255, 0.25);
     padding: 16px 20px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -147,7 +160,7 @@ header {
     display: flex;
     align-items: center;
     gap: 8px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 .header-title p {
@@ -155,6 +168,7 @@ header {
     color: var(--text-secondary);
     font-weight: 500;
     margin-top: 1px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .header-actions {
@@ -164,14 +178,15 @@ header {
 }
 
 .glass-btn-icon {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(16px) saturate(200%);
+    -webkit-backdrop-filter: blur(16px) saturate(200%);
     padding: 9px;
     border-radius: 14px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.5px solid var(--liquid-glass-border-top);
     color: var(--text-white);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -180,13 +195,13 @@ header {
 }
 
 .glass-btn-icon:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
+    border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-1px);
 }
 
 .glass-btn-icon:active {
-    transform: scale(0.94);
+    transform: scale(0.92);
 }
 
 .glass-btn-icon i, .clock-icon i {
@@ -195,43 +210,66 @@ header {
 }
 
 .clock-icon {
-    background: rgba(10, 132, 255, 0.18);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.20) 0%, rgba(10, 132, 255, 0.05) 100%);
+    backdrop-filter: blur(16px) saturate(200%);
+    -webkit-backdrop-filter: blur(16px) saturate(200%);
     padding: 9px;
     border-radius: 14px;
     border: 1px solid rgba(10, 132, 255, 0.35);
-    color: #60a5fa;
-    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.6);
+    color: #93c5fd;
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.22), inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
 }
 
-/* iOS Liquid Glass Hero Card */
+/* ============================================================
+   LIQUID GLASS PLAQUES (Плашки - Жидкое стекло)
+   ============================================================ */
+
+/* 1. Главная плашка таймера */
 .countdown-card {
     max-width: 460px;
     margin: 0 auto;
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    border-radius: 30px;
+    background: var(--liquid-glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    border-radius: 32px;
     padding: 28px 24px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 2px solid var(--liquid-glass-border-top);
+    border-bottom: 1px solid var(--liquid-glass-border-bottom);
     position: relative;
     overflow: hidden;
-    box-shadow: var(--glass-card-shadow);
+    box-shadow: var(--liquid-card-shadow);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Liquid Specular Light Sheen */
-.countdown-card::before {
+/* Глянцевый световой блик жидкого стекла (Convex Liquid Meniscus) */
+.countdown-card::before,
+.lesson-item::before,
+.grade-calc-card::before,
+.bells-card::before,
+.settings-glass-card::before,
+.grades-container::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 40%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%);
+    height: 36%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 60%, transparent 100%);
+    border-radius: inherit;
     pointer-events: none;
-    border-radius: 30px 30px 0 0;
+}
+
+/* Свечение капли по нижнему краю */
+.countdown-card::after,
+.lesson-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 16px 0 rgba(255, 255, 255, 0.06);
+    pointer-events: none;
 }
 
 .status-badge {
@@ -242,27 +280,30 @@ header {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: 9999px;
-    margin-bottom: 12px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
+    margin-bottom: 14px;
+    backdrop-filter: blur(14px) saturate(200%);
+    -webkit-backdrop-filter: blur(14px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18), inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
 }
 
 .status-lesson {
-    background: rgba(10, 132, 255, 0.22);
-    color: #93c5fd;
-    border-color: rgba(10, 132, 255, 0.4);
-    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.22) 0%, rgba(10, 132, 255, 0.06) 100%);
+    color: #bae6fd;
+    border-color: rgba(10, 132, 255, 0.35);
+    border-top-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.25), inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
 }
 
 .status-break {
-    background: rgba(48, 209, 88, 0.22);
-    color: #6ee7b7;
-    border-color: rgba(48, 209, 88, 0.4);
-    box-shadow: 0 4px 14px rgba(48, 209, 88, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+    background: linear-gradient(135deg, rgba(48, 209, 88, 0.22) 0%, rgba(48, 209, 88, 0.06) 100%);
+    color: #a7f3d0;
+    border-color: rgba(48, 209, 88, 0.35);
+    border-top-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 4px 14px rgba(48, 209, 88, 0.25), inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
 }
 
 .lesson-name {
@@ -273,7 +314,7 @@ header {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
 }
 
 .timer-row {
@@ -290,7 +331,7 @@ header {
     letter-spacing: -0.05em;
     line-height: 1;
     color: var(--text-white);
-    text-shadow: 0 4px 24px rgba(10, 132, 255, 0.45), 0 1px 2px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 4px 28px rgba(10, 132, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .timer-label {
@@ -300,17 +341,19 @@ header {
     color: var(--text-secondary);
     letter-spacing: 0.12em;
     margin-top: 8px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .timer-info {
     text-align: right;
-    background: rgba(255, 255, 255, 0.07);
-    padding: 10px 14px;
-    border-radius: 18px;
-    border: 1px solid var(--glass-border-subtle);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+    padding: 10px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.5px solid var(--liquid-glass-border-top);
+    backdrop-filter: blur(16px) saturate(200%);
+    -webkit-backdrop-filter: blur(16px) saturate(200%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15), inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
 }
 
 .timer-info .label {
@@ -327,12 +370,13 @@ header {
     font-weight: 600;
     color: var(--text-white);
     font-family: var(--font-mono);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .next-lesson-mini {
     margin-top: 20px;
     padding-top: 14px;
-    border-top: 1px solid var(--glass-border-subtle);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -353,9 +397,12 @@ header {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Main Layout */
+/* ============================================================
+   MAIN CONTENT & TABS
+   ============================================================ */
 main {
     max-width: 460px;
     margin: 20px auto 0;
@@ -374,7 +421,7 @@ main {
 @keyframes iosFadeIn {
     from { 
         opacity: 0; 
-        transform: translateY(12px) scale(0.99); 
+        transform: translateY(14px) scale(0.985); 
     }
     to { 
         opacity: 1; 
@@ -382,19 +429,22 @@ main {
     }
 }
 
-/* iOS Segmented Control Day Selector */
+/* 2. Плашка выбора дня (Liquid Glass Day Selector Menu) */
 .day-selector {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    border-radius: 22px;
-    padding: 5px;
+    background: var(--liquid-glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    border-radius: 26px;
+    padding: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.8px solid var(--liquid-glass-border-top);
+    box-shadow: var(--liquid-glass-shadow);
     margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
 }
 
 #day-buttons {
@@ -409,8 +459,8 @@ main {
     background: transparent;
     border: none;
     flex: 1;
-    height: 38px;
-    border-radius: 16px;
+    height: 40px;
+    border-radius: 18px;
     color: var(--text-secondary);
     font-weight: 700;
     font-size: 12px;
@@ -420,26 +470,29 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .day-btn:hover {
     color: var(--text-white);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .day-btn.active {
-    background: var(--ios-blue);
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.9) 0%, rgba(0, 110, 230, 0.95) 100%);
     color: #ffffff;
-    box-shadow: 0 4px 16px rgba(10, 132, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 18px rgba(10, 132, 255, 0.5), inset 0 1px 1.5px rgba(255, 255, 255, 0.8);
     transform: scale(1.02);
 }
 
 .nav-arrow {
     background: transparent;
     border: none;
-    width: 38px;
-    height: 38px;
-    border-radius: 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 16px;
     color: var(--text-secondary);
     cursor: pointer;
     display: flex;
@@ -449,7 +502,7 @@ main {
 }
 
 .nav-arrow:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.16);
     color: var(--text-white);
 }
 
@@ -463,79 +516,80 @@ main {
     pointer-events: none;
 }
 
-/* iOS Glass Lesson Cards */
+/* 3. Плашки уроков (Liquid Glass Lesson Plaques) */
 .lesson-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 }
 
 .lesson-item {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    border-radius: 22px;
-    padding: 16px 18px;
-    border: 1px solid var(--glass-border);
+    background: var(--liquid-glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    border-radius: 24px;
+    padding: 18px 20px;
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.8px solid var(--liquid-glass-border-top);
+    border-bottom: 1px solid var(--liquid-glass-border-bottom);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: var(--glass-shadow);
+    box-shadow: var(--liquid-glass-shadow);
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
 }
 
-.lesson-item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
-    pointer-events: none;
-}
-
 .lesson-item:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.35);
+    background: linear-gradient(135deg, rgba(255, 255, 255, calc(var(--glass-opacity) * 1.8)) 0%, rgba(255, 255, 255, calc(var(--glass-opacity) * 0.5)) 100%);
+    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.65);
 }
 
 .lesson-item.active {
-    background: rgba(10, 132, 255, 0.22);
-    border-color: rgba(10, 132, 255, 0.55);
-    box-shadow: 0 12px 32px rgba(10, 132, 255, 0.28), inset 0 1px 1.5px rgba(255, 255, 255, 0.6);
-    transform: scale(1.015);
+    background: var(--liquid-glass-bg-active);
+    border: 1.5px solid rgba(10, 132, 255, 0.55);
+    border-top: 2px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 14px 36px rgba(10, 132, 255, 0.32), 
+                inset 0 1.5px 2px rgba(255, 255, 255, 0.7), 
+                inset 0 0 18px rgba(10, 132, 255, 0.2);
+    transform: scale(1.02);
 }
 
 .lesson-left {
     display: flex;
-    gap: 14px;
+    gap: 15px;
     align-items: center;
     overflow: hidden;
 }
 
+/* Плашка-линза номера урока */
 .lesson-order {
     flex-shrink: 0;
-    width: 42px;
-    height: 42px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 14px;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(14px) saturate(200%);
+    -webkit-backdrop-filter: blur(14px) saturate(200%);
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     font-size: 16px;
     color: var(--text-white);
-    border: 1px solid var(--glass-border);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.5px solid var(--liquid-glass-border-top);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .lesson-item.active .lesson-order {
-    background: var(--ios-blue);
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.90) 0%, rgba(0, 110, 230, 0.95) 100%);
     color: #ffffff;
-    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.5);
-    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 6px 18px rgba(10, 132, 255, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.7);
 }
 
 .lesson-info {
@@ -546,24 +600,26 @@ main {
     font-size: 16px;
     font-weight: 600;
     letter-spacing: -0.02em;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.55);
 }
 
 .lesson-room {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 3px 9px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+    padding: 3px 10px;
     border-radius: 9999px;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .lesson-time {
@@ -578,6 +634,7 @@ main {
     font-family: var(--font-mono);
     color: var(--text-white);
     margin-bottom: 2px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .time-end {
@@ -585,32 +642,24 @@ main {
     font-weight: 500;
     color: var(--text-dim);
     font-family: var(--font-mono);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* iOS Glass Grade Calculator */
+/* 4. Плашка калькулятора баллов (Grade Calc Plaque) */
 .grade-calc-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    border-radius: 30px;
+    background: var(--liquid-glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    border-radius: 32px;
     padding: 28px 24px;
     text-align: center;
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 2px solid var(--liquid-glass-border-top);
+    border-bottom: 1px solid var(--liquid-glass-border-bottom);
     margin-bottom: 20px;
-    box-shadow: var(--glass-card-shadow);
+    box-shadow: var(--liquid-card-shadow);
     position: relative;
     overflow: hidden;
-}
-
-.grade-calc-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
-    pointer-events: none;
 }
 
 .average-label {
@@ -620,6 +669,7 @@ main {
     color: var(--text-secondary);
     letter-spacing: 0.16em;
     margin-bottom: 6px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .average-value {
@@ -628,7 +678,7 @@ main {
     font-weight: 800;
     letter-spacing: -0.05em;
     color: var(--text-white);
-    text-shadow: 0 4px 30px rgba(10, 132, 255, 0.45);
+    text-shadow: 0 4px 32px rgba(10, 132, 255, 0.55), 0 2px 8px rgba(0, 0, 0, 0.7);
     margin: 4px 0;
 }
 
@@ -640,16 +690,17 @@ main {
 }
 
 .grade-btn {
-    height: 58px;
-    border-radius: 18px;
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    font-size: 22px;
+    height: 60px;
+    border-radius: 20px;
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.8px solid var(--liquid-glass-border-top);
+    backdrop-filter: blur(18px) saturate(200%);
+    -webkit-backdrop-filter: blur(18px) saturate(200%);
+    font-size: 24px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.7);
 }
 
 .grade-btn:hover {
@@ -661,35 +712,42 @@ main {
 }
 
 .btn-5 { 
-    background: rgba(48, 209, 88, 0.25); 
+    background: linear-gradient(135deg, rgba(48, 209, 88, 0.22) 0%, rgba(48, 209, 88, 0.06) 100%);
     color: #4ade80; 
-    border-color: rgba(48, 209, 88, 0.45);
+    border-color: rgba(48, 209, 88, 0.35);
+    border-top-color: rgba(255, 255, 255, 0.7);
 }
 .btn-4 { 
-    background: rgba(10, 132, 255, 0.25); 
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.22) 0%, rgba(10, 132, 255, 0.06) 100%);
     color: #60a5fa; 
-    border-color: rgba(10, 132, 255, 0.45);
+    border-color: rgba(10, 132, 255, 0.35);
+    border-top-color: rgba(255, 255, 255, 0.7);
 }
 .btn-3 { 
-    background: rgba(255, 159, 10, 0.25); 
+    background: linear-gradient(135deg, rgba(255, 159, 10, 0.22) 0%, rgba(255, 159, 10, 0.06) 100%);
     color: #fbbf24; 
-    border-color: rgba(255, 159, 10, 0.45);
+    border-color: rgba(255, 159, 10, 0.35);
+    border-top-color: rgba(255, 255, 255, 0.7);
 }
 .btn-2 { 
-    background: rgba(255, 69, 58, 0.25); 
+    background: linear-gradient(135deg, rgba(255, 69, 58, 0.22) 0%, rgba(255, 69, 58, 0.06) 100%);
     color: #fb7185; 
-    border-color: rgba(255, 69, 58, 0.45);
+    border-color: rgba(255, 69, 58, 0.35);
+    border-top-color: rgba(255, 255, 255, 0.7);
 }
 
 .grades-container {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    border-radius: 26px;
+    background: var(--liquid-glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    border-radius: 28px;
     padding: 22px;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.8px solid var(--liquid-glass-border-top);
+    box-shadow: var(--liquid-glass-shadow);
     min-height: 120px;
+    position: relative;
+    overflow: hidden;
 }
 
 .grades-header {
@@ -706,20 +764,21 @@ main {
 }
 
 .grade-pill {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     position: relative;
-    font-size: 15px;
+    font-size: 16px;
     cursor: pointer;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(14px) saturate(200%);
+    -webkit-backdrop-filter: blur(14px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25), inset 0 1px 1.5px rgba(255, 255, 255, 0.7);
     transition: transform 0.2s, opacity 0.2s;
 }
 
@@ -732,28 +791,31 @@ main {
     display: none;
 }
 
-/* Bells Table Card */
+/* 5. Плашка звонков (Bells Table Plaque) */
 .bells-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    border-radius: 28px;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-card-shadow);
+    background: var(--liquid-glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    border-radius: 30px;
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 2px solid var(--liquid-glass-border-top);
+    border-bottom: 1px solid var(--liquid-glass-border-bottom);
+    box-shadow: var(--liquid-card-shadow);
     overflow: hidden;
     margin-bottom: 24px;
+    position: relative;
 }
 
 .bells-header {
     padding: 20px 24px;
-    background: rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid var(--glass-border-subtle);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     font-size: 17px;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .bell-row {
@@ -761,7 +823,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--glass-border-subtle);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     transition: background 0.2s;
 }
 
@@ -770,7 +832,7 @@ main {
 }
 
 .bell-row:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .bell-left {
@@ -780,18 +842,19 @@ main {
 }
 
 .bell-num {
-    width: 34px;
-    height: 34px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--text-white);
-    border: 1px solid var(--glass-border-subtle);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.5px solid var(--liquid-glass-border-top);
+    box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
 }
 
 .bell-times {
@@ -801,33 +864,39 @@ main {
 }
 
 .time-box {
-    background: rgba(10, 132, 255, 0.2);
-    color: #93c5fd;
-    padding: 7px 14px;
-    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.22) 0%, rgba(10, 132, 255, 0.06) 100%);
+    color: #bae6fd;
+    padding: 8px 16px;
+    border-radius: 14px;
     font-family: var(--font-mono);
     font-weight: 700;
     font-size: 13px;
     border: 1px solid rgba(10, 132, 255, 0.35);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.6);
+    box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
 }
 
 .time-box-end {
-    background: rgba(255, 255, 255, 0.08);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 100%);
     color: var(--text-secondary);
-    border: 1px solid var(--glass-border-subtle);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.5);
 }
 
-/* Custom Wallpaper / Customizer Card */
+/* 6. Плашка настроек обоев и стекла (Settings Plaque) */
 .settings-glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-    border-radius: 28px;
+    background: var(--liquid-glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(220%) contrast(106%);
+    border-radius: 30px;
     padding: 24px;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-card-shadow);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 2px solid var(--liquid-glass-border-top);
+    border-bottom: 1px solid var(--liquid-glass-border-bottom);
+    box-shadow: var(--liquid-card-shadow);
     margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
 }
 
 .settings-row {
@@ -845,9 +914,10 @@ main {
 }
 
 .wallpaper-thumb-btn {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.06) 100%);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.5px solid var(--liquid-glass-border-top);
+    border-radius: 18px;
     padding: 12px;
     color: var(--text-white);
     font-size: 12px;
@@ -856,27 +926,30 @@ main {
     display: flex;
     align-items: center;
     gap: 8px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px) saturate(200%);
+    -webkit-backdrop-filter: blur(14px) saturate(200%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2), inset 0 1px 1.5px rgba(255, 255, 255, 0.6);
     transition: all 0.2s;
 }
 
 .wallpaper-thumb-btn:hover {
-    background: rgba(255, 255, 255, 0.16);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.12) 100%);
+    border-color: rgba(255, 255, 255, 0.7);
     transform: translateY(-1px);
 }
 
 .wallpaper-thumb-btn.active {
-    background: rgba(10, 132, 255, 0.25);
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.45) 0%, rgba(10, 132, 255, 0.2) 100%);
     border-color: var(--ios-blue);
-    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 6px 18px rgba(10, 132, 255, 0.4), inset 0 1px 1.5px rgba(255, 255, 255, 0.7);
 }
 
 .glass-upload-btn {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%);
-    border: 1px dashed var(--glass-border-highlight);
-    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.1) 100%);
+    border: 1px dashed rgba(255, 255, 255, 0.6);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
     padding: 14px;
     color: var(--text-white);
     font-size: 13px;
@@ -886,12 +959,15 @@ main {
     align-items: center;
     justify-content: center;
     gap: 10px;
+    backdrop-filter: blur(16px) saturate(200%);
+    -webkit-backdrop-filter: blur(16px) saturate(200%);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.7);
     transition: all 0.2s;
     width: 100%;
 }
 
 .glass-upload-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.18) 100%);
     border-style: solid;
     transform: translateY(-1px);
 }
@@ -913,6 +989,7 @@ main {
     font-size: 12px;
     font-weight: 600;
     color: var(--text-secondary);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .glass-slider {
@@ -921,9 +998,10 @@ main {
     width: 100%;
     height: 8px;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.22);
     outline: none;
     backdrop-filter: blur(8px);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .glass-slider::-webkit-slider-thumb {
@@ -934,16 +1012,18 @@ main {
     border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* iOS Floating Glass Bottom Navigation Bar */
+/* ============================================================
+   LIQUID GLASS BOTTOM NAVIGATION MENU (Меню - Жидкое стекло)
+   ============================================================ */
 .bottom-nav {
     position: fixed;
     bottom: 18px;
-    left: 16px;
-    right: 16px;
+    left: 14px;
+    right: 14px;
     z-index: 100;
     pointer-events: none;
 }
@@ -951,16 +1031,38 @@ main {
 .nav-container {
     max-width: 460px;
     margin: 0 auto;
-    background: rgba(14, 17, 26, 0.72);
-    backdrop-filter: blur(32px) saturate(200%);
-    -webkit-backdrop-filter: blur(32px) saturate(200%);
-    border-radius: 36px;
+    /* Кристально прозрачное ультра-жидкое стекло */
+    background: linear-gradient(135deg, rgba(255, 255, 255, calc(var(--glass-opacity) * 1.5)) 0%, rgba(255, 255, 255, calc(var(--glass-opacity) * 0.35)) 100%);
+    backdrop-filter: blur(28px) saturate(220%) contrast(106%);
+    -webkit-backdrop-filter: blur(28px) saturate(220%) contrast(106%);
+    border-radius: 38px;
     padding: 7px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--liquid-glass-border-side);
+    border-top: 1.8px solid var(--liquid-glass-border-top);
+    border-bottom: 1px solid var(--liquid-glass-border-bottom);
     display: flex;
     justify-content: space-around;
-    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), inset 0 1px 1.5px rgba(255, 255, 255, 0.45);
+    /* Световой ореол преломления линзы */
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45), 
+                inset 0 1.5px 2.5px rgba(255, 255, 255, 0.6), 
+                inset 0 -1.5px 2px rgba(0, 0, 0, 0.15),
+                inset 0 0 16px rgba(255, 255, 255, 0.05);
     pointer-events: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Верхний глянцевый блик меню */
+.nav-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 38%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.02) 80%, transparent 100%);
+    border-radius: 38px 38px 0 0;
+    pointer-events: none;
 }
 
 .nav-item {
@@ -969,9 +1071,9 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 3px;
-    padding: 8px 0;
-    border-radius: 22px;
-    color: var(--text-dim);
+    padding: 9px 0;
+    border-radius: 24px;
+    color: rgba(255, 255, 255, 0.72);
     text-decoration: none;
     font-size: 10px;
     font-weight: 600;
@@ -979,6 +1081,9 @@ main {
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
     user-select: none;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 1;
 }
 
 .nav-item i { 
@@ -988,41 +1093,47 @@ main {
 }
 
 .nav-item:hover {
-    color: var(--text-white);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .nav-item:active {
     transform: scale(0.92);
 }
 
+/* Активный пункт меню - светящаяся жидкая капля */
 .nav-item.active {
     color: #ffffff;
-    background: var(--ios-blue);
-    box-shadow: 0 6px 18px rgba(10, 132, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.9) 0%, rgba(0, 110, 230, 0.98) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 20px rgba(10, 132, 255, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.85);
 }
 
 .nav-item.active i {
-    transform: scale(1.1);
+    transform: scale(1.12);
 }
 
-/* Desktop Polish */
+/* ============================================================
+   RESPONSIVE & DESKTOP POLISH
+   ============================================================ */
 @media (min-width: 600px) {
     header { padding: 20px 28px; }
     .header-title h1 { font-size: 26px; }
     .header-title p { font-size: 14px; }
-    .countdown-card { padding: 36px 32px; border-radius: 36px; }
+    .countdown-card { padding: 36px 32px; border-radius: 38px; }
     .lesson-name { font-size: 30px; }
     .timer-display { font-size: 60px; }
     main { margin: 28px auto 0; padding: 0 20px; }
-    .lesson-item { padding: 20px 22px; border-radius: 26px; }
-    .lesson-order { width: 46px; height: 46px; font-size: 18px; }
+    .lesson-item { padding: 20px 22px; border-radius: 28px; }
+    .lesson-order { width: 48px; height: 48px; font-size: 18px; }
     .lesson-info h3 { font-size: 18px; }
-    .grade-calc-card { padding: 36px 28px; border-radius: 36px; }
+    .grade-calc-card { padding: 36px 28px; border-radius: 38px; }
     .average-value { font-size: 76px; }
-    .grade-btn { height: 64px; font-size: 24px; }
+    .grade-btn { height: 66px; font-size: 26px; }
     .bottom-nav { bottom: 24px; }
-    .nav-container { padding: 9px; border-radius: 40px; }
-    .nav-item { font-size: 11px; padding: 10px 0; }
+    .nav-container { padding: 9px; border-radius: 42px; }
+    .nav-item { font-size: 11px; padding: 11px 0; }
     .grade-pill .remove { opacity: 0; }
     .grade-pill:hover .remove { opacity: 1; }
 }
