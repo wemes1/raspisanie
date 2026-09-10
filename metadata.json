@@ -1,6 +1,0 @@
-{
-  "name": "SchoolTime",
-  "description": "Приложение для отслеживания расписания уроков, звонков и времени до конца текущего занятия.",
-  "requestFramePermissions": [],
-  "majorCapabilities": []
-}
